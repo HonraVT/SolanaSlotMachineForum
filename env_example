@@ -1,0 +1,70 @@
+# .env.example - Copie para .env e preencha com seus valores
+
+# ==============================================
+# CONFIGURAÇÕES DO SERVIDOR WEBHOOK
+# ==============================================
+PORT=3000
+AUTH_HEADER=Bearer sua_chave_secreta_aqui
+# Caminho do webhook obfuscado para evitar spam (padrão: /webhook)
+# Atenção: O caminho completo sempre incluirá a uri "/api" ex: /api/webhook_ef3b7bfe
+WEBHOOK_PATH=/webhook_helius_eb8ef4b2
+
+# ==============================================
+# CONFIGURAÇÕES SOLANA
+# ==============================================
+SOLANA_RPC=https://api.mainnet-beta.solana.com
+APP_PUBLIC_KEY=sua_chave_publica_da_carteira_principal
+APP_SECRET_KEY=sua_chave_privada_da_carteira_principal_em_base58
+APP_FEE_ESTEEM_PUBLIC_KEY=chave_publica_para_estimar_taxas
+
+# ==============================================
+# CONFIGURAÇÕES DO JOGO
+# ==============================================
+# Preço de 1 ficha em lamports (100000 = 0.0001 SOL)
+CHIP_PRICE_LAMPORTS=100000
+
+# Conversão de lamports para fichas (JSON)
+# Formato: {"lamports": fichas}
+LAMPORTS_TO_CHIPS={"500000":5,"1000000":10,"1500000":15}
+
+# Opcional: Rode "npm run qrcodegen" e faça o upload dos qrcodes gerados na pasta "qr_image" e coloque os links abaixo para exibir no comando "buy"
+QRCODES=["https://i.imgur.com/wRc14uM.png","https://i.imgur.com/d3JFfmB.png","https://i.imgur.com/5dhFD5K.png"]
+
+# Pesos dos símbolos (maior peso = mais frequente)
+SYMBOL_WEIGHTS={"CH":50,"LE":25,"BE":20,"DI":12,"SE":8}
+
+# Tabela de pagamento (combinação: multiplicador)
+PAYOUT_TABLE={"CHCHCH":2,"LELELE":3,"BEBEBE":5,"DIDIDI":8,"SESESE":15}
+
+# Emojis dos símbolos
+SYMBOLS_EMOJI={"CH":"🍒","LE":"🍋","BE":"🔔","DI":"💎","SE":"7️⃣"}
+
+# ==============================================
+# CONFIGURAÇÕES DO FÓRUM XENFORO
+# ==============================================
+FORUM_URL=https://seu-forum.com
+FORUM_XF_USER_COOKIE=cookie_do_usuario_bot_do_xenforo
+BOT_NAME=Nome-Do-Seu-Bot
+LANGUAGE=pt_br
+
+# Intervalo entre respostas do Bot, necessário para evitar o anti-flood do fórum
+# em milissegundos (padrão: 30000 = 30 segundos)
+BOT_FLOOD_DELAY=30000
+
+# ==============================================
+# CONFIGURAÇÕES DE MENSAGEM DE BOAS-VINDAS
+# ==============================================
+# Título da mensagem privada de boas-vindas (padrão: "Solana's Slot Machine")
+WELCOME_MESSAGE_TITLE=Solana's Slot Machine
+
+# ==============================================
+# CONFIGURAÇÕES OPCIONAIS
+# ==============================================
+# Intervalo do bot em milissegundos (padrão: 20000 = 20 segundos)
+# BOT_INTERVAL_MS=20000
+
+# ==============================================
+# CONFIGURAÇÕES DE LOG
+# ==============================================
+# ERROR, WARN, INFO, DEBUG
+LOG_LEVEL=ERROR

@@ -1,0 +1,63 @@
+{
+  "apps": [
+    {
+      "name": "slot-server",
+      "script": "scripts/server.js",
+      "cwd": "./",
+      "instances": 1,
+      "exec_mode": "fork",
+      "watch": false,
+      "max_memory_restart": "512M",
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "env_development": {
+        "NODE_ENV": "development"
+      },
+      "log_file": "logs/server.log",
+      "out_file": "logs/server-out.log",
+      "error_file": "logs/server-error.log",
+      "time": true,
+      "autorestart": true,
+      "max_restarts": 10,
+      "min_uptime": "10s",
+      "restart_delay": 5000,
+      "ignore_watch": [
+        "node_modules",
+        "logs",
+        "qr_images",
+        "*.db"
+      ]
+    },
+    {
+      "name": "slot-scheduler",
+      "script": "scripts/scheduler.js",
+      "cwd": "./",
+      "instances": 1,
+      "exec_mode": "fork",
+      "watch": false,
+      "max_memory_restart": "256M",
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "env_development": {
+        "NODE_ENV": "development"
+      },
+      "log_file": "logs/scheduler.log",
+      "out_file": "logs/scheduler-out.log",
+      "error_file": "logs/scheduler-error.log",
+      "time": true,
+      "autorestart": true,
+      "max_restarts": 15,
+      "min_uptime": "30s",
+      "restart_delay": 10000,
+      "ignore_watch": [
+        "node_modules",
+        "logs",
+        "qr_images",
+        "*.db"
+      ],
+      "cron_restart": "0 3 * * *"
+    }
+  ]
+}
