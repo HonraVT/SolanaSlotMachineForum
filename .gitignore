@@ -1,0 +1,30 @@
+```
+# Configuration files
+*.config.js
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+.npm/
+.yarn/
+
+# Build artifacts
+dist/
+build/
+target/
+out/
+.DS_Store
+Thumbs.db
+```

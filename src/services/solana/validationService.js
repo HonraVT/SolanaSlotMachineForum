@@ -1,5 +1,5 @@
 // src/services/solana/validationService.js
-import { PublicKey } from '@solana/web3.js';
+import { address, isAddress } from '@solana/kit';
 import { logger } from '../../utils/logger.js';
 
 export function validateWallet(walletString) {
@@ -8,9 +8,8 @@ export function validateWallet(walletString) {
       return false;
     }
 
-    // Tentar criar PublicKey - se falhar, é inválida
-    new PublicKey(walletString);
-    return true;
+    // Use @solana/kit's isAddress to validate wallet format
+    return isAddress(walletString);
 
   } catch (error) {
     logger.debug(`Invalid wallet format: ${walletString}`, error.message);

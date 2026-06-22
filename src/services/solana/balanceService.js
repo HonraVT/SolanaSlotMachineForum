@@ -1,23 +1,24 @@
 // src/services/solana/balanceService.js
-import { Connection, Keypair, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { createSolanaClient, address, lamports } from '@solana/kit';
 import base58 from 'bs58';
 import config from '../../config/environment.js';
 import { logger } from '../../utils/logger.js';
 
-const connection = new Connection(config.SOLANA_RPC, 'confirmed');
-const APP_KEYPAIR = Keypair.fromSecretKey(base58.decode(config.APP_SECRET_KEY));
+const { getBalance, getLatestBlockhash } = createSolanaClient({ url: config.SOLANA_RPC });
+const APP_KEYPAIR_ADDRESS = address(config.APP_PUBLIC_KEY || base58.encode(new Uint8Array()));
 
 export async function getAppWalletBalance() {
   try {
-    const lamports = await connection.getBalance(APP_KEYPAIR.publicKey);
-    const sol = lamports / LAMPORTS_PER_SOL;
+    const result = await getBalance(APP_KEYPAIR_ADDRESS);
+    const lamportsValue = Number(result.value);
+    const sol = lamportsValue / 1e9;
 
-    logger.debug(`App wallet balance: ${lamports} lamports (${sol} SOL)`);
+    logger.debug(`App wallet balance: ${lamportsValue} lamports (${sol} SOL)`);
 
     return {
-      lamports,
+      lamports: lamportsValue,
       sol,
-      publicKey: APP_KEYPAIR.publicKey.toBase58()
+      publicKey: APP_KEYPAIR_ADDRESS
     };
 
   } catch (error) {
@@ -28,12 +29,13 @@ export async function getAppWalletBalance() {
 
 export async function getWalletBalance(publicKeyString) {
   try {
-    const publicKey = new PublicKey(publicKeyString);
-    const lamports = await connection.getBalance(publicKey);
-    const sol = lamports / LAMPORTS_PER_SOL;
+    const publicKey = address(publicKeyString);
+    const result = await getBalance(publicKey);
+    const lamportsValue = Number(result.value);
+    const sol = lamportsValue / 1e9;
 
     return {
-      lamports,
+      lamports: lamportsValue,
       sol,
       publicKey: publicKeyString
     };
@@ -43,4 +45,3 @@ export async function getWalletBalance(publicKeyString) {
     throw error;
   }
 }
-console.log(await getAppWalletBalance())
