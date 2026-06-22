@@ -1,56 +1,30 @@
 ```
-# Dependencies
-node_modules/
+# Configuration files
+*.config.js
 
 # Logs and temp files
 *.log
 *.tmp
 
-# Environment variables
+# Environment
 .env
 .env.local
-*.env.*
+.env.*
 
-# IDE and editor settings
+# Editors
 .vscode/
 .idea/
 
-# Build and distribution
+# Dependencies
+node_modules/
+.npm/
+.yarn/
+
+# Build artifacts
 dist/
 build/
 target/
-
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Virtual environments
-venv/
-.venv/
-env/
-ENV/
-
-# OS generated files
+out/
 .DS_Store
 Thumbs.db
-
-# Package manager lock files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# Testing
-*.test.js
-*.spec.js
-__tests__/
-
-# Runtime
-.nyc_output/
 ```
