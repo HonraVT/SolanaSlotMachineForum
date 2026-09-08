@@ -39,11 +39,41 @@ export async function initDatabase() {
         processedAt DATETIME DEFAULT CURRENT_TIMESTAMP
       );
 
+      CREATE TABLE IF NOT EXISTS prediction_markets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        question TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'open',
+        winningOption TEXT,
+        createdBy TEXT,
+        closesAt DATETIME,
+        resolvedAt DATETIME,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      );
+
+      CREATE TABLE IF NOT EXISTS predictions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        marketId INTEGER NOT NULL,
+        userId TEXT NOT NULL,
+        option TEXT NOT NULL,
+        stake REAL NOT NULL,
+        status TEXT NOT NULL DEFAULT 'open',
+        payout REAL DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(marketId, userId),
+        FOREIGN KEY(marketId) REFERENCES prediction_markets(id),
+        FOREIGN KEY(userId) REFERENCES users(id)
+      );
+
       -- Índices para melhor performance
       CREATE INDEX IF NOT EXISTS idx_users_wallet ON users(wallet);
       CREATE INDEX IF NOT EXISTS idx_gameplay_userId ON gameplay(userId);
       CREATE INDEX IF NOT EXISTS idx_transactions_userId ON transactions(userId);
       CREATE INDEX IF NOT EXISTS idx_transactions_processedAt ON transactions(processedAt);
+      CREATE INDEX IF NOT EXISTS idx_prediction_markets_status ON prediction_markets(status);
+      CREATE INDEX IF NOT EXISTS idx_predictions_marketId ON predictions(marketId);
+      CREATE INDEX IF NOT EXISTS idx_predictions_userId ON predictions(userId);
     `);
 
     logger.info('Database tables created/verified successfully');

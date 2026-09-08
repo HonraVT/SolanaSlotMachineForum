@@ -40,6 +40,12 @@ PAYOUT_TABLE={"CHCHCH":2,"LELELE":3,"BEBEBE":5,"DIDIDI":8,"SESESE":15}
 SYMBOLS_EMOJI={"CH":"🍒","LE":"🍋","BE":"🔔","DI":"💎","SE":"7️⃣"}
 
 # ==============================================
+# CONFIGURAÇÕES DO MERCADO DE PREVISÕES
+# ==============================================
+# IDs de usuários do fórum que podem criar e resolver previsões, separados por vírgula
+ADMIN_USER_IDS=123456,789012
+
+# ==============================================
 # CONFIGURAÇÕES DO FÓRUM XENFORO
 # ==============================================
 FORUM_URL=https://seu-forum.com

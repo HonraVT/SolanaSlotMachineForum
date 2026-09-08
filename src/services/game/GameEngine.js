@@ -4,6 +4,7 @@ import { gameController } from '../../controllers/gameController.js';
 import { userController } from '../../controllers/userController.js';
 import { statusController } from '../../controllers/statusController.js';
 import { buyController } from '../../controllers/buyController.js';
+import { predictionController } from '../../controllers/predictionController.js';
 import { logger } from '../../utils/logger.js';
 
 export class GameEngine {
@@ -14,6 +15,11 @@ export class GameEngine {
       join: userController.join.bind(userController),
       status: statusController.getStatus.bind(statusController),
       buy: buyController.buy.bind(buyController),
+      predictionHelp: predictionController.help.bind(predictionController),
+      predictionList: predictionController.list.bind(predictionController),
+      predictionPredict: predictionController.predict.bind(predictionController),
+      predictionCreate: predictionController.create.bind(predictionController),
+      predictionResolve: predictionController.resolve.bind(predictionController),
       error: this.handleError.bind(this)
     };
   }
@@ -60,13 +66,13 @@ export class GameEngine {
   getErrorMessage(language = 'pt_br', errorType = 'systemError') {
     const messages = {
       pt_br: {
-        invalidCommand: '[CENTER][COLOR=rgb(184, 49, 47)][SIZE=6]Comando inválido.[/SIZE][/COLOR]\n[SIZE=4]Comandos disponíveis:\n• cadastrar [sua_carteira] - Para se registrar\n• jogar [fichas] - Para jogar (1-15 fichas)\n• status - Ver seu status\n• comprar - Comprar fichas[/SIZE][/CENTER]',
-        unknownCommand: '[CENTER][COLOR=rgb(184, 49, 47)][SIZE=6]Comando não reconhecido.[/SIZE][/COLOR]\n[SIZE=4]Use "cadastrar" para se registrar, "jogar" para apostar, "status" para ver informações ou "comprar" para adquirir fichas.[/SIZE][/CENTER]',
+        invalidCommand: '[CENTER][COLOR=rgb(184, 49, 47)][SIZE=6]Comando inválido.[/SIZE][/COLOR]\n[SIZE=4]Comandos disponíveis:\n• cadastrar [sua_carteira] - Para se registrar\n• jogar [fichas] - Para jogar (1-15 fichas)\n• status - Ver seu status\n• comprar - Comprar fichas\n• previsoes - Mercados de previsão\n• prever <id> sim|nao <fichas> - Fazer previsão[/SIZE][/CENTER]',
+        unknownCommand: '[CENTER][COLOR=rgb(184, 49, 47)][SIZE=6]Comando não reconhecido.[/SIZE][/COLOR]\n[SIZE=4]Use "cadastrar" para se registrar, "jogar" para apostar, "status", "comprar" ou "previsoes".[/SIZE][/CENTER]',
         systemError: '[CENTER][COLOR=rgb(184, 49, 47)][SIZE=6]Erro do sistema.[/SIZE][/COLOR]\n[SIZE=4]Tente novamente em alguns instantes.[/SIZE][/CENTER]'
       },
       en: {
-        invalidCommand: '[CENTER][COLOR=rgb(184, 49, 47)][SIZE=6]Invalid command.[/SIZE][/COLOR]\n[SIZE=4]Available commands:\n• join [your_wallet] - To register\n• play [chips] - To play (1-15 chips)\n• status - Check your status\n• buy - Purchase chips[/SIZE][/CENTER]',
-        unknownCommand: '[CENTER][COLOR=rgb(184, 49, 47)][SIZE=6]Unknown command.[/SIZE][/COLOR]\n[SIZE=4]Use "join" to register, "play" to bet, "status" for information or "buy" to purchase chips.[/SIZE][/CENTER]',
+        invalidCommand: '[CENTER][COLOR=rgb(184, 49, 47)][SIZE=6]Invalid command.[/SIZE][/COLOR]\n[SIZE=4]Available commands:\n• join [your_wallet] - To register\n• play [chips] - To play (1-15 chips)\n• status - Check your status\n• buy - Purchase chips\n• markets - Prediction markets\n• predict <id> yes|no <chips> - Make prediction[/SIZE][/CENTER]',
+        unknownCommand: '[CENTER][COLOR=rgb(184, 49, 47)][SIZE=6]Unknown command.[/SIZE][/COLOR]\n[SIZE=4]Use "join" to register, "play" to bet, "status", "buy" or "markets".[/SIZE][/CENTER]',
         systemError: '[CENTER][COLOR=rgb(184, 49, 47)][SIZE=6]System error.[/SIZE][/COLOR]\n[SIZE=4]Please try again in a few moments.[/SIZE][/CENTER]'
       }
     };
