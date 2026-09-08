@@ -25,6 +25,12 @@ const config = {
   PAYOUT_TABLE: JSON.parse(process.env.PAYOUT_TABLE || '{}'),
   SYMBOLS_EMOJI: JSON.parse(process.env.SYMBOLS_EMOJI || '{}'),
 
+  // Prediction Markets
+  ADMIN_USER_IDS: (process.env.ADMIN_USER_IDS || '')
+    .split(',')
+    .map(id => id.trim())
+    .filter(Boolean),
+
   // Forum
   FORUM_URL: process.env.FORUM_URL,
   FORUM_XF_USER_COOKIE: process.env.FORUM_XF_USER_COOKIE,

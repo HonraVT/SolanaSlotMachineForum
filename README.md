@@ -173,6 +173,12 @@ PAYOUT_TABLE={"CHCHCH":2,"LELELE":3,"BEBEBE":5,"DIDIDI":8,"SESESE":15}
 SYMBOLS_EMOJI={"CH":"🍒","LE":"🍋","BE":"🔔","DI":"💎","SE":"7️⃣"}
 
 # ==============================================
+# CONFIGURAÇÕES DO MERCADO DE PREVISÕES
+# ==============================================
+# IDs de usuários do fórum que podem criar e resolver previsões, separados por vírgula
+ADMIN_USER_IDS=123456,789012
+
+# ==============================================
 # CONFIGURAÇÕES DO FÓRUM XENFORO
 # ==============================================
 FORUM_URL=https://seu-forum.com
@@ -262,6 +268,19 @@ Fichas restantes: 3
 | SESESE     | 15x           | 7️⃣7️⃣7️⃣ |
 
 ---
+
+
+### Mercado de previsões simplificado
+
+Além do caça-níqueis, o bot inclui um modo simples de previsões administradas pelo fórum:
+
+- **previsoes** — lista mercados abertos.
+- **previsao** — mostra ajuda do mercado de previsões.
+- **prever `<id>` `sim|nao` `<fichas>`** — registra uma previsão do usuário e trava as fichas apostadas no pool.
+- **criar_previsao `<pergunta>`** — cria um mercado, apenas para usuários listados em `ADMIN_USER_IDS`.
+- **resolver_previsao `<id>` `sim|nao`** — encerra o mercado e distribui o pool dos usuários que erraram proporcionalmente entre os usuários que acertaram.
+
+Cada usuário pode prever apenas uma vez por mercado. Não há compra e venda de posições: é apenas uma previsão simples usando fichas.
 
 ### API Local de Administração
 ```bash

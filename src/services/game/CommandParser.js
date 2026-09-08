@@ -21,7 +21,17 @@ export class CommandParser {
         buy: "buy",
         comprar: "buy",
         depositar: "buy",
-        fichas: "buy"
+        fichas: "buy",
+        previsoes: "predictionList",
+        previsões: "predictionList",
+        mercados: "predictionList",
+        previsao: "predictionHelp",
+        previsão: "predictionHelp",
+        prever: "predictionPredict",
+        criar_previsao: "predictionCreate",
+        criar_previsão: "predictionCreate",
+        resolver_previsao: "predictionResolve",
+        resolver_previsão: "predictionResolve"
       },
       en: {
         error: "error",
@@ -37,7 +47,13 @@ export class CommandParser {
         buy: "buy",
         purchase: "buy",
         deposit: "buy",
-        chips: "buy"
+        chips: "buy",
+        markets: "predictionList",
+        predictions: "predictionList",
+        market: "predictionHelp",
+        predict: "predictionPredict",
+        create_market: "predictionCreate",
+        resolve_market: "predictionResolve"
       }
     };
   }
@@ -47,7 +63,8 @@ export class CommandParser {
       return { command: 'error', argument: '' };
     }
 
-    const [rawCommand = '', rawArgument = ''] = input.trim().split(/\s+/);
+    const [rawCommand = '', ...rawArgumentParts] = input.trim().split(/\s+/);
+    const rawArgument = rawArgumentParts.join(' ');
     const normalizedCommand = rawCommand.toLowerCase();
 
     const languageCommands = this.commands[language] || this.commands['pt_br'];
